@@ -93,7 +93,7 @@ exports.likeSauce = (req, res, next) => {
                             usersLiked: sauce.usersLiked,
                             _id: req.params.id
                         })
-                            .then(() => res.status(200).json({ message: "Vous avez pas d'avis sur la sauce " + sauce.name + " !" }))
+                            .then(() => res.status(200).json({ message: "Vous n'avez pas d'avis sur la sauce " + sauce.name + " !" }))
                             .catch(error => res.status(400).json({ error }));
                     }
                 });
@@ -106,7 +106,7 @@ exports.likeSauce = (req, res, next) => {
                             usersDisliked: sauce.usersDisliked,
                             _id: req.params.id
                         })
-                            .then(() => res.status(200).json({ message: "Vous avez pas d'avis sur " + sauce.name + " !" }))
+                            .then(() => res.status(200).json({ message: "Vous n'avez pas d'avis sur " + sauce.name + " !" }))
                             .catch(error => res.status(400).json({ error }));
                     }
                 });
