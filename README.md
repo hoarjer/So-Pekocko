@@ -16,8 +16,8 @@ Dans un premier temps, il faut activer l'application frontend se trouvant à cet
 
 Pour installer le server sur votre ordinateur :
 
-1- cloner le repository de la partie backend de l'application : 
-2- Ouvrir le terminal de commande à partir de ce répertoire
+1- cloner le repository de la partie backend de l'application : https://github.com/hoarjer/So-Pekocko
+2- Ouvrir le terminal de commande de votre éditeur de texte à partir de ce répertoire
 3- Tapper npm install
 4- Tapper node server
 5- Aller sur l'application de So-Pekocko qui devrait utiliser l'API : http://localhost:4200
