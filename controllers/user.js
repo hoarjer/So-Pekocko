@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 
 const User = require('../models/User');
 
+// inscription avec mot de passe fort hashé
 exports.signup = (req, res, next) => {
     const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{10,}$/;
     if (regexPassword.test(req.body.password)) {
@@ -23,6 +24,7 @@ exports.signup = (req, res, next) => {
 
 };
 
+// Connexion avec création de token
 exports.login = (req, res, next) => {
     User.findOne({ email: req.body.email })
         .then(user => {
