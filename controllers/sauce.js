@@ -1,7 +1,7 @@
 const Sauce = require('../models/Sauce');
 const fs = require('fs');
 
-// POST: créer une sauce
+// POST: créer une sauce et la sauvegarder
 exports.createSauce = (req, res, next) => {
     const sauceObject = JSON.parse(req.body.sauce);
     delete sauceObject._id;
@@ -58,14 +58,28 @@ exports.deleteSauce = (req, res, next) => {
         .catch(error => res.status(500).json({ error }));
 };
 
+// function like() {
+    
+//     Sauce.updateOne({ _id: req.params.id }, {
+//         likes: sauceObject.likes,
+//         usersLiked: sauceObject.usersLiked,
+//         dislikes: sauceObject.dislikes,
+//         usersDisliked: sauceObject.usersDisliked,
+//         _id: req.params.id
+//     })
+//         .then(() => res.status(200).json({ message: req.body.message }))
+//         .catch(error => res.status(400).json({ error }));
+// };
+
 // POST: liker ou disliker une sauce
 exports.likeSauce = (req, res, next) => {
-
     Sauce.findOne({ _id: req.params.id })
         .then(sauce => {
+            const sauceObject = sauce;
             if (req.body.like == 1) { // mettre un like
-                sauce.likes += 1;
-                sauce.usersLiked.push(req.body.userId);
+                sauceObject.likes += 1; // ajoute 1 à likes
+                sauceObject.usersLiked.push(req.body.userId); // ajoute le userId aux usersLiked
+                // màj des données
                 Sauce.updateOne({ _id: req.params.id }, {
                     likes: sauce.likes,
                     usersLiked: sauce.usersLiked,
@@ -74,8 +88,9 @@ exports.likeSauce = (req, res, next) => {
                     .then(() => res.status(200).json({ message: "Vous aimez la sauce " + sauce.name + " !" }))
                     .catch(error => res.status(400).json({ error }));
             } else if (req.body.like == -1) { //mettre un dislike
-                sauce.dislikes += 1;
-                sauce.usersDisliked.push(req.body.userId);
+                sauce.dislikes += 1; // ajoute 1 à dislikes
+                sauce.usersDisliked.push(req.body.userId); // ajoute le userId aux usersDisliked
+                // màj des données
                 Sauce.updateOne({ _id: req.params.id }, {
                     dislikes: sauce.dislikes,
                     usersDisliked: sauce.usersDisliked,
@@ -86,8 +101,8 @@ exports.likeSauce = (req, res, next) => {
             } else if (req.body.like == 0) {
                 sauce.usersLiked.forEach(element => { //enlever like
                     if (element == req.body.userId) {
-                        sauce.likes -= 1;
-                        sauce.usersLiked.splice(sauce.usersLiked.indexOf(req.body.userId), 1);
+                        sauce.likes -= 1; // retire 1 à likes
+                        sauce.usersLiked.splice(sauce.usersLiked.indexOf(req.body.userId), 1); // retire le userId
                         Sauce.updateOne({ _id: req.params.id }, {
                             likes: sauce.likes,
                             usersLiked: sauce.usersLiked,
@@ -99,8 +114,8 @@ exports.likeSauce = (req, res, next) => {
                 });
                 sauce.usersDisliked.forEach(element => { // enlever dislike
                     if (element == req.body.userId) {
-                        sauce.dislikes -= 1;
-                        sauce.usersDisliked.splice(sauce.usersDisliked.indexOf(req.body.userId), 1);
+                        sauce.dislikes -= 1; // retire 1 à dislikes
+                        sauce.usersDisliked.splice(sauce.usersDisliked.indexOf(req.body.userId), 1); // retire le userId
                         Sauce.updateOne({ _id: req.params.id }, {
                             dislikes: sauce.dislikes,
                             usersDisliked: sauce.usersDisliked,
@@ -111,8 +126,9 @@ exports.likeSauce = (req, res, next) => {
                     }
                 });
             }
-            req.body.sauce = sauce;
         })
         .catch(error => res.status(400).json({ error }));
 };
+
+
 

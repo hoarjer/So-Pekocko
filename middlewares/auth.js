@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 
-// middleware d'authentification
+// middleware d'authentification qui vérifie que le userId et bien celui qu'on retrouve dans le token
+// ce qui autorise les modifications des données
 module.exports = (req, res, next) => {
     try {
         const token = req.headers.authorization.split(' ')[1];
