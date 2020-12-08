@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const path = require('path');
+const helmet = require('helmet');
 
 // Les routes
 const userRoutes = require('./routes/user');
@@ -11,13 +12,18 @@ const sauceRoutes = require('./routes/sauce');
 const app = express();
 
 // connection à la base de données
-mongoose.connect('mongodb+srv://hoarjer:33974@cluster0.ao8zs.mongodb.net/<dbname>?retryWrites=true&w=majority',
+mongoose.connect('mongodb+srv://XXXXXXXXXXXX@cluster0.ao8zs.mongodb.net/<dbname>?retryWrites=true&w=majority',
     {
         useNewUrlParser: true,
         useUnifiedTopology: true
     })
     .then(() => console.log('Connexion à MongoDB réussie !'))
     .catch(() => console.log('Connexion à MongoDB échouée !'));
+
+// middleware qui parse les requêtes du client
+app.use(bodyParser.json());
+
+app.use(helmet());
 
 // middleware général premettant toute les demandes de toutes origines d'accéder à l'API
 app.use((req, res, next) => {
@@ -29,9 +35,6 @@ app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
     next();
 });
-
-// middleware qui parse les requêtes du client
-app.use(bodyParser.json());
 
 // middleware qui charge les fichiers du répertoire images
 app.use('/images', express.static(path.join(__dirname, 'images')));
