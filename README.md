@@ -14,15 +14,16 @@ Dans un premier temps, il faut activer l'application frontend:
 4. Aller sur l'application de So-Pekocko : http://localhost:4200
 ------------
 
-##Installation du server
+##Installation du serveur
 
-Pour installer le server sur votre ordinateur :
+Pour installer le serveur sur votre ordinateur :
 
-1. cloner le repository de la partie [backend](https://github.com/hoarjer/So-Pekocko) de l'application
-2. Ouvrir le terminal de commande de votre éditeur de texte à partir de ce répertoire
-3. Tapper _npm install_
-4. Tapper _node server_
-5. Aller sur l'application de So-Pekocko qui devrait utiliser l'API : http://localhost:4200
+1. Cloner le repository de la partie [backend](https://github.com/hoarjer/So-Pekocko) de l'application
+2. Ouvrer le fichier app.js et rentrez le password de votre utilisateur MongoDB à la place des "XXXXXXX" à la ligne 15
+3. Ouvrir le terminal de commande de votre éditeur de texte à partir de ce répertoire
+4. Tapper _npm install_
+5. Tapper _node server_
+6. Aller sur l'application de So-Pekocko qui devrait utiliser l'API : http://localhost:4200
 ------------
 
 ## Compétences
